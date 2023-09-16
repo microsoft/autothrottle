@@ -1,0 +1,118 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "write-home-timeline-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "write-home-timeline-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "write-home-timeline-service",
+            "labels": {
+              "name": "write-home-timeline-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "write-home-timeline-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "WriteHomeTimelineService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "write-home-timeline-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "write-home-timeline-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "write-user-timeline-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "write-user-timeline-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "write-user-timeline-service",
+            "labels": {
+              "name": "write-user-timeline-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "write-user-timeline-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "WriteUserTimelineService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "write-user-timeline-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "write-user-timeline-service"
+        }
+      }
+    }
+  ]
+}

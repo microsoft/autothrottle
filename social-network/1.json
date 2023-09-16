@@ -1,0 +1,1654 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "name": "social-network"
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "jaeger"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "jaeger"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "jaeger",
+            "labels": {
+              "name": "jaeger"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "jaeger",
+                "image": "jaegertracing/all-in-one:latest@sha256:30238ffd383f266651cd4e0c36be67b6b0d3d882d0bbb67304c39af9ee61a4ef",
+                "env": [
+                  {
+                    "name": "COLLECTOR_ZIPKIN_HTTP_PORT",
+                    "value": "9411"
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "jaeger"
+      },
+      "spec": {
+        "type": "NodePort",
+        "ports": [
+          {
+            "name": "16686",
+            "port": 16686,
+            "nodePort": 30005
+          },
+          {
+            "name": "9411",
+            "port": 9411
+          }
+        ],
+        "selector": {
+          "name": "jaeger"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "nginx-thrift"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "nginx-thrift"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "nginx-thrift",
+            "labels": {
+              "name": "nginx-thrift"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "nginx-thrift",
+                "image": "hypercube/social-network-ml-nginx:latest@sha256:6ac95749cb7aff055735ce490c7e702d1dabf8b6262c87d52d49b8ef4377833a"
+              },
+              {
+                "name": "dnsmasq",
+                "image": "janeczku/go-dnsmasq:release-1.0.7@sha256:3a99ad92353b55e97863812470e4f7403b47180f06845fdd06060773fe04184f",
+                "args": [
+                  "--listen",
+                  "127.0.0.1:53",
+                  "--default-resolver",
+                  "--append-search-domains"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "nginx-thrift"
+      },
+      "spec": {
+        "type": "NodePort",
+        "ports": [
+          {
+            "port": 8080,
+            "nodePort": 30001
+          }
+        ],
+        "selector": {
+          "name": "nginx-thrift"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "compose-post-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "compose-post-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "compose-post-service",
+            "labels": {
+              "name": "compose-post-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "compose-post-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "ComposePostService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "compose-post-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "compose-post-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "compose-post-redis"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "compose-post-redis"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "compose-post-redis",
+            "labels": {
+              "name": "compose-post-redis"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "compose-post-redis",
+                "image": "redis:latest@sha256:ae51486efeea8a9b3f85542e408f79a5012d5b7fa35ae19733104ecc6992a248",
+                "command": [
+                  "sh",
+                  "-c",
+                  "rm -f /data/dump.rdb && redis-server --save \"\" --appendonly no"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "compose-post-redis"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 6379
+          }
+        ],
+        "selector": {
+          "name": "compose-post-redis"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "home-timeline-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "home-timeline-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "home-timeline-service",
+            "labels": {
+              "name": "home-timeline-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "home-timeline-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "HomeTimelineService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "home-timeline-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "home-timeline-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "home-timeline-redis"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "home-timeline-redis"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "home-timeline-redis",
+            "labels": {
+              "name": "home-timeline-redis"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "home-timeline-redis",
+                "image": "redis:latest@sha256:ae51486efeea8a9b3f85542e408f79a5012d5b7fa35ae19733104ecc6992a248",
+                "command": [
+                  "sh",
+                  "-c",
+                  "rm -f /data/dump.rdb && redis-server --save \"\" --appendonly no"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "home-timeline-redis"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 6379
+          }
+        ],
+        "selector": {
+          "name": "home-timeline-redis"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "media-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "media-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "media-service",
+            "labels": {
+              "name": "media-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "media-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "MediaService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "media-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "media-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "post-storage-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "post-storage-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "post-storage-service",
+            "labels": {
+              "name": "post-storage-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "post-storage-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "PostStorageService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "post-storage-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "post-storage-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "post-storage-memcached"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "post-storage-memcached"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "post-storage-memcached",
+            "labels": {
+              "name": "post-storage-memcached"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "post-storage-memcached",
+                "image": "memcached:1.6.0@sha256:95b8ef0e16a1f0b99d2d9c933afcc6caf395c4e33b281444b38d6951f4c2e3e8",
+                "env": [
+                  {
+                    "name": "MEMCACHED_CACHE_SIZE",
+                    "value": "4096"
+                  },
+                  {
+                    "name": "MEMCACHED_THREADS",
+                    "value": "8"
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "post-storage-memcached"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 11211
+          }
+        ],
+        "selector": {
+          "name": "post-storage-memcached"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "post-storage-mongodb"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "post-storage-mongodb"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "post-storage-mongodb",
+            "labels": {
+              "name": "post-storage-mongodb"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "post-storage-mongodb",
+                "image": "mongo:4@sha256:90e9402437d0fafc818fde2cc108ccb445e02b0c85b230bcf3a55def0f0029ec",
+                "args": [
+                  "--nojournal",
+                  "--quiet"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "post-storage-mongodb"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "name": "post-storage-mongodb"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "social-graph-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "social-graph-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "social-graph-service",
+            "labels": {
+              "name": "social-graph-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "social-graph-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "SocialGraphService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "social-graph-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "social-graph-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "social-graph-mongodb"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "social-graph-mongodb"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "social-graph-mongodb",
+            "labels": {
+              "name": "social-graph-mongodb"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "social-graph-mongodb",
+                "image": "mongo:4@sha256:90e9402437d0fafc818fde2cc108ccb445e02b0c85b230bcf3a55def0f0029ec",
+                "args": [
+                  "--nojournal",
+                  "--quiet"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "social-graph-mongodb"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "name": "social-graph-mongodb"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "social-graph-redis"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "social-graph-redis"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "social-graph-redis",
+            "labels": {
+              "name": "social-graph-redis"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "social-graph-redis",
+                "image": "redis:latest@sha256:ae51486efeea8a9b3f85542e408f79a5012d5b7fa35ae19733104ecc6992a248",
+                "command": [
+                  "sh",
+                  "-c",
+                  "rm -f /data/dump.rdb && redis-server --save \"\" --appendonly no"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "social-graph-redis"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 6379
+          }
+        ],
+        "selector": {
+          "name": "social-graph-redis"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "text-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "text-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "text-service",
+            "labels": {
+              "name": "text-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "text-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "TextService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "text-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "text-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "unique-id-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "unique-id-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "unique-id-service",
+            "labels": {
+              "name": "unique-id-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "unique-id-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "UniqueIdService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "unique-id-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "unique-id-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "url-shorten-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "url-shorten-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "url-shorten-service",
+            "labels": {
+              "name": "url-shorten-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "url-shorten-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "UrlShortenService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "url-shorten-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "url-shorten-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-mention-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "user-mention-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "user-mention-service",
+            "labels": {
+              "name": "user-mention-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "user-mention-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "UserMentionService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-mention-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "user-mention-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "user-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "user-service",
+            "labels": {
+              "name": "user-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "user-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "UserService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "user-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-memcached"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "user-memcached"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "user-memcached",
+            "labels": {
+              "name": "user-memcached"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "user-memcached",
+                "image": "memcached:1.6.0@sha256:95b8ef0e16a1f0b99d2d9c933afcc6caf395c4e33b281444b38d6951f4c2e3e8",
+                "env": [
+                  {
+                    "name": "MEMCACHED_CACHE_SIZE",
+                    "value": "4096"
+                  },
+                  {
+                    "name": "MEMCACHED_THREADS",
+                    "value": "8"
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-memcached"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 11211
+          }
+        ],
+        "selector": {
+          "name": "user-memcached"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-mongodb"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "user-mongodb"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "user-mongodb",
+            "labels": {
+              "name": "user-mongodb"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "user-mongodb",
+                "image": "mongo:4@sha256:90e9402437d0fafc818fde2cc108ccb445e02b0c85b230bcf3a55def0f0029ec",
+                "args": [
+                  "--nojournal",
+                  "--quiet"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-mongodb"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "name": "user-mongodb"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-timeline-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "user-timeline-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "user-timeline-service",
+            "labels": {
+              "name": "user-timeline-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "user-timeline-service",
+                "image": "hypercube/social-network-ml-microservices:latest@sha256:1b8d25acb3137df320b80d7f9ccd55eb3bc8a1141fc57d78d57a978ce3e0d605",
+                "command": [
+                  "UserTimelineService"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-timeline-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 9090
+          }
+        ],
+        "selector": {
+          "name": "user-timeline-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-timeline-mongodb"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "user-timeline-mongodb"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "user-timeline-mongodb",
+            "labels": {
+              "name": "user-timeline-mongodb"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "user-timeline-mongodb",
+                "image": "mongo:4@sha256:90e9402437d0fafc818fde2cc108ccb445e02b0c85b230bcf3a55def0f0029ec",
+                "args": [
+                  "--nojournal",
+                  "--quiet"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-timeline-mongodb"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "name": "user-timeline-mongodb"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-timeline-redis"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "user-timeline-redis"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "user-timeline-redis",
+            "labels": {
+              "name": "user-timeline-redis"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "user-timeline-redis",
+                "image": "redis:latest@sha256:ae51486efeea8a9b3f85542e408f79a5012d5b7fa35ae19733104ecc6992a248",
+                "command": [
+                  "sh",
+                  "-c",
+                  "rm -f /data/dump.rdb && redis-server --save \"\" --appendonly no"
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "user-timeline-redis"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 6379
+          }
+        ],
+        "selector": {
+          "name": "user-timeline-redis"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "write-home-timeline-rabbitmq"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "write-home-timeline-rabbitmq"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "write-home-timeline-rabbitmq",
+            "labels": {
+              "name": "write-home-timeline-rabbitmq"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "write-home-timeline-rabbitmq",
+                "image": "rabbitmq:latest@sha256:d96c58d1e2e55a32a03fa9ba01d00c6383d1aca26fb2790f14ac411fd6e45152",
+                "env": [
+                  {
+                    "name": "RABBITMQ_ERLANG_COOKIE",
+                    "value": "WRITE-HOME-TIMELINE-RABBITMQ"
+                  },
+                  {
+                    "name": "RABBITMQ_DEFAULT_VHOST",
+                    "value": "/"
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "write-home-timeline-rabbitmq"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 5672
+          }
+        ],
+        "selector": {
+          "name": "write-home-timeline-rabbitmq"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "write-user-timeline-rabbitmq"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "write-user-timeline-rabbitmq"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "write-user-timeline-rabbitmq",
+            "labels": {
+              "name": "write-user-timeline-rabbitmq"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "write-user-timeline-rabbitmq",
+                "image": "rabbitmq:latest@sha256:d96c58d1e2e55a32a03fa9ba01d00c6383d1aca26fb2790f14ac411fd6e45152",
+                "env": [
+                  {
+                    "name": "RABBITMQ_ERLANG_COOKIE",
+                    "value": "WRITE-USER-TIMELINE-RABBITMQ"
+                  },
+                  {
+                    "name": "RABBITMQ_DEFAULT_VHOST",
+                    "value": "/"
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "write-user-timeline-rabbitmq"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 5672
+          }
+        ],
+        "selector": {
+          "name": "write-user-timeline-rabbitmq"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "media-filter-service-1"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "media-filter-service",
+            "replicaId": "1"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "media-filter-service-1",
+            "labels": {
+              "name": "media-filter-service",
+              "replicaId": "1"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "media-filter-service",
+                "image": "hypercube/social-network-ml-media-filter:latest@sha256:ece820ae1156eab2c6b41eae07ecac524960d47bcdd4e063e9d3520399dcac05"
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "media-filter-service-2"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "media-filter-service",
+            "replicaId": "2"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "media-filter-service-2",
+            "labels": {
+              "name": "media-filter-service",
+              "replicaId": "2"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "media-filter-service",
+                "image": "hypercube/social-network-ml-media-filter:latest@sha256:ece820ae1156eab2c6b41eae07ecac524960d47bcdd4e063e9d3520399dcac05"
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "media-filter-service-3"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "media-filter-service",
+            "replicaId": "3"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "media-filter-service-3",
+            "labels": {
+              "name": "media-filter-service",
+              "replicaId": "3"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "media-filter-service",
+                "image": "hypercube/social-network-ml-media-filter:latest@sha256:ece820ae1156eab2c6b41eae07ecac524960d47bcdd4e063e9d3520399dcac05"
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "media-filter-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 40000
+          }
+        ],
+        "selector": {
+          "name": "media-filter-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "text-filter-service"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "name": "text-filter-service"
+          }
+        },
+        "template": {
+          "metadata": {
+            "name": "text-filter-service",
+            "labels": {
+              "name": "text-filter-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "text-filter-service",
+                "image": "hypercube/social-network-ml-text-filter:latest@sha256:6f541847637a92e331f1088b78dcdf77acbe6242960994aabf1ced51dc308117"
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "social-network",
+        "name": "text-filter-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 40000
+          }
+        ],
+        "selector": {
+          "name": "text-filter-service"
+        }
+      }
+    }
+  ]
+}
