@@ -1,0 +1,2131 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "name": "hotel-reservation",
+        "labels": {
+          "io.kompose.service": "hotel-reservation"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "consul"
+        },
+        "name": "consul",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "consul"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "consul"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "consul",
+                "image": "consul:1.15.4@sha256:362519540425cf077229da3851f3b80d622742dd81f1b2014863c044c2124ef3",
+                "ports": [
+                  {
+                    "containerPort": 8300
+                  },
+                  {
+                    "containerPort": 8400
+                  },
+                  {
+                    "containerPort": 8500
+                  },
+                  {
+                    "containerPort": 53,
+                    "protocol": "UDP"
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "consul"
+        },
+        "name": "consul",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8300",
+            "port": 8300,
+            "targetPort": 8300
+          },
+          {
+            "name": "8400",
+            "port": 8400,
+            "targetPort": 8400
+          },
+          {
+            "name": "8500",
+            "port": 8500,
+            "targetPort": 8500
+          },
+          {
+            "name": "8600",
+            "port": 8600,
+            "targetPort": 53,
+            "protocol": "UDP"
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "consul"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "jaeger"
+        },
+        "name": "jaeger",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "jaeger"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "jaeger"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "jaeger",
+                "image": "jaegertracing/all-in-one:latest@sha256:30238ffd383f266651cd4e0c36be67b6b0d3d882d0bbb67304c39af9ee61a4ef",
+                "ports": [
+                  {
+                    "containerPort": 14269
+                  },
+                  {
+                    "containerPort": 5778
+                  },
+                  {
+                    "containerPort": 14268
+                  },
+                  {
+                    "containerPort": 14267
+                  },
+                  {
+                    "containerPort": 16686
+                  },
+                  {
+                    "containerPort": 5775,
+                    "protocol": "UDP"
+                  },
+                  {
+                    "containerPort": 6831,
+                    "protocol": "UDP"
+                  },
+                  {
+                    "containerPort": 6832,
+                    "protocol": "UDP"
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "jaeger"
+        },
+        "name": "jaeger",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "type": "NodePort",
+        "ports": [
+          {
+            "name": "14269",
+            "port": 14269,
+            "targetPort": 14269
+          },
+          {
+            "name": "5778",
+            "port": 5778,
+            "targetPort": 5778
+          },
+          {
+            "name": "14268",
+            "port": 14268,
+            "targetPort": 14268
+          },
+          {
+            "name": "14267",
+            "port": 14267,
+            "targetPort": 14267
+          },
+          {
+            "name": "16686",
+            "port": 16686,
+            "targetPort": 16686,
+            "nodePort": 30005
+          },
+          {
+            "name": "5775",
+            "port": 5775,
+            "targetPort": 5775,
+            "protocol": "UDP"
+          },
+          {
+            "name": "6831",
+            "port": 6831,
+            "targetPort": 6831,
+            "protocol": "UDP"
+          },
+          {
+            "name": "6832",
+            "port": 6832,
+            "targetPort": 6832,
+            "protocol": "UDP"
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "jaeger"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "frontend"
+        },
+        "name": "frontend",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "frontend"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "frontend"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "frontend",
+                "image": "igorrudyk1/hotelreservation:latest@sha256:cb64678950a01728551701f5782e34eef049e422f73eae7dcb69d7549682008c",
+                "command": [
+                  "frontend"
+                ],
+                "ports": [
+                  {
+                    "containerPort": 5000
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "frontend"
+        },
+        "name": "frontend",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "type": "NodePort",
+        "ports": [
+          {
+            "name": "5000",
+            "port": 5000,
+            "targetPort": 5000,
+            "nodePort": 30001
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "frontend"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "geo"
+        },
+        "name": "geo",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "geo"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "geo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "geo",
+                "image": "igorrudyk1/hotelreservation:latest@sha256:cb64678950a01728551701f5782e34eef049e422f73eae7dcb69d7549682008c",
+                "command": [
+                  "geo"
+                ],
+                "ports": [
+                  {
+                    "containerPort": 8083
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "geo"
+        },
+        "name": "geo",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8083",
+            "port": 8083,
+            "targetPort": 8083
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "geo"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-geo"
+        },
+        "name": "mongodb-geo",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "mongodb-geo"
+          }
+        },
+        "strategy": {
+          "type": "Recreate"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "mongodb-geo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "mongodb-geo",
+                "image": "mongo:4.4.6@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "mountPath": "/data/db",
+                    "name": "geo"
+                  }
+                ]
+              }
+            ],
+            "hostname": "geo-db",
+            "restartPolicy": "Always",
+            "volumes": [
+              {
+                "name": "geo",
+                "persistentVolumeClaim": {
+                  "claimName": "geo-pvc"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-geo"
+        },
+        "name": "mongodb-geo",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "mongodb-geo",
+            "port": 27017,
+            "targetPort": 27017
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "mongodb-geo"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "geo-pv",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "volumeMode": "Filesystem",
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "capacity": {
+          "storage": "1Gi"
+        },
+        "storageClassName": "geo-storage",
+        "hostPath": {
+          "path": "/data/volumes/geo-pv",
+          "type": "DirectoryOrCreate"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "geo-pvc",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "storageClassName": "geo-storage",
+        "resources": {
+          "requests": {
+            "storage": "1Gi"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "profile"
+        },
+        "name": "profile",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "profile"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "profile"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "profile",
+                "image": "igorrudyk1/hotelreservation:latest@sha256:cb64678950a01728551701f5782e34eef049e422f73eae7dcb69d7549682008c",
+                "command": [
+                  "profile"
+                ],
+                "ports": [
+                  {
+                    "containerPort": 8081
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "profile"
+        },
+        "name": "profile",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8081",
+            "port": 8081,
+            "targetPort": 8081
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "profile"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "memcached-profile"
+        },
+        "name": "memcached-profile",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "memcached-profile"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "memcached-profile"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "memcached-profile",
+                "image": "memcached:latest@sha256:8f8117a71c39d10d0ae0e1daf88d57619c99306fd4bd06e5270d962be0d607f9",
+                "env": [
+                  {
+                    "name": "MEMCACHED_CACHE_SIZE",
+                    "value": "128"
+                  },
+                  {
+                    "name": "MEMCACHED_THREADS",
+                    "value": "2"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 11211
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "memcached-profile"
+        },
+        "name": "memcached-profile",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "memcached-profile",
+            "port": 11211,
+            "targetPort": 11211
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "memcached-profile"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-profile"
+        },
+        "name": "mongodb-profile",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "mongodb-profile"
+          }
+        },
+        "strategy": {
+          "type": "Recreate"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "mongodb-profile"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "mongodb-profile",
+                "image": "mongo:4.4.6@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "mountPath": "/data/db",
+                    "name": "profile"
+                  }
+                ]
+              }
+            ],
+            "hostname": "profile-db",
+            "restartPolicy": "Always",
+            "volumes": [
+              {
+                "name": "profile",
+                "persistentVolumeClaim": {
+                  "claimName": "profile-pvc"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-profile"
+        },
+        "name": "mongodb-profile",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "mongodb-profile",
+            "port": 27017,
+            "targetPort": 27017
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "mongodb-profile"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "profile-pv",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "volumeMode": "Filesystem",
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "capacity": {
+          "storage": "1Gi"
+        },
+        "storageClassName": "profile-storage",
+        "hostPath": {
+          "path": "/data/volumes/profile-pv",
+          "type": "DirectoryOrCreate"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "profile-pvc",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "storageClassName": "profile-storage",
+        "resources": {
+          "requests": {
+            "storage": "1Gi"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "rate"
+        },
+        "name": "rate",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "rate"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "rate"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "rate",
+                "image": "igorrudyk1/hotelreservation:latest@sha256:cb64678950a01728551701f5782e34eef049e422f73eae7dcb69d7549682008c",
+                "command": [
+                  "rate"
+                ],
+                "ports": [
+                  {
+                    "containerPort": 8084
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "rate"
+        },
+        "name": "rate",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8084",
+            "port": 8084,
+            "targetPort": 8084
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "rate"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "memcached-rate"
+        },
+        "name": "memcached-rate",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "memcached-rate"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "memcached-rate"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "memcached-rate",
+                "image": "memcached:latest@sha256:8f8117a71c39d10d0ae0e1daf88d57619c99306fd4bd06e5270d962be0d607f9",
+                "env": [
+                  {
+                    "name": "MEMCACHED_CACHE_SIZE",
+                    "value": "128"
+                  },
+                  {
+                    "name": "MEMCACHED_THREADS",
+                    "value": "2"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 11211
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "memcached-rate"
+        },
+        "name": "memcached-rate",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "memcached-rate",
+            "port": 11211,
+            "targetPort": 11211
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "memcached-rate"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-rate"
+        },
+        "name": "mongodb-rate",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "mongodb-rate"
+          }
+        },
+        "strategy": {
+          "type": "Recreate"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "mongodb-rate"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "mongodb-rate",
+                "image": "mongo:4.4.6@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "mountPath": "/data/db",
+                    "name": "rate"
+                  }
+                ]
+              }
+            ],
+            "hostname": "rate-db",
+            "restartPolicy": "Always",
+            "volumes": [
+              {
+                "name": "rate",
+                "persistentVolumeClaim": {
+                  "claimName": "rate-pvc"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-rate"
+        },
+        "name": "mongodb-rate",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "mongodb-rate",
+            "port": 27017,
+            "targetPort": 27017
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "mongodb-rate"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "rate-pv",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "volumeMode": "Filesystem",
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "capacity": {
+          "storage": "1Gi"
+        },
+        "storageClassName": "rate-storage",
+        "hostPath": {
+          "path": "/data/volumes/rate-pv",
+          "type": "DirectoryOrCreate"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "rate-pvc",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "storageClassName": "rate-storage",
+        "resources": {
+          "requests": {
+            "storage": "1Gi"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "recommendation"
+        },
+        "name": "recommendation",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "recommendation"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "recommendation"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "recommendation",
+                "image": "igorrudyk1/hotelreservation:latest@sha256:cb64678950a01728551701f5782e34eef049e422f73eae7dcb69d7549682008c",
+                "command": [
+                  "recommendation"
+                ],
+                "ports": [
+                  {
+                    "containerPort": 8085
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "recommendation"
+        },
+        "name": "recommendation",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8085",
+            "port": 8085,
+            "targetPort": 8085
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "recommendation"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-recommendation"
+        },
+        "name": "mongodb-recommendation",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "mongodb-recommendation"
+          }
+        },
+        "strategy": {
+          "type": "Recreate"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "mongodb-recommendation"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "mongodb-recommendation",
+                "image": "mongo:4.4.6@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "mountPath": "/data/db",
+                    "name": "recommendation"
+                  }
+                ]
+              }
+            ],
+            "hostname": "recommendation-db",
+            "restartPolicy": "Always",
+            "volumes": [
+              {
+                "name": "recommendation",
+                "persistentVolumeClaim": {
+                  "claimName": "recommendation-pvc"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-recommendation"
+        },
+        "name": "mongodb-recommendation",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "mongodb-recommendation",
+            "port": 27017,
+            "targetPort": 27017
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "mongodb-recommendation"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "recommendation-pv",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "volumeMode": "Filesystem",
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "capacity": {
+          "storage": "1Gi"
+        },
+        "storageClassName": "recommendation-storage",
+        "hostPath": {
+          "path": "/data/volumes/recommendation-pv",
+          "type": "DirectoryOrCreate"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "recommendation-pvc",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "storageClassName": "recommendation-storage",
+        "resources": {
+          "requests": {
+            "storage": "1Gi"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "reservation"
+        },
+        "name": "reservation",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "reservation"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "reservation"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "reservation",
+                "image": "igorrudyk1/hotelreservation:latest@sha256:cb64678950a01728551701f5782e34eef049e422f73eae7dcb69d7549682008c",
+                "command": [
+                  "reservation"
+                ],
+                "ports": [
+                  {
+                    "containerPort": 8087
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "reservation"
+        },
+        "name": "reservation",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8087",
+            "port": 8087,
+            "targetPort": 8087
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "reservation"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "memcached-reserve"
+        },
+        "name": "memcached-reserve",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "memcached-reserve"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "memcached-reserve"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "memcached-reserve",
+                "image": "memcached:latest@sha256:8f8117a71c39d10d0ae0e1daf88d57619c99306fd4bd06e5270d962be0d607f9",
+                "env": [
+                  {
+                    "name": "MEMCACHED_CACHE_SIZE",
+                    "value": "128"
+                  },
+                  {
+                    "name": "MEMCACHED_THREADS",
+                    "value": "2"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 11211
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "memcached-reserve"
+        },
+        "name": "memcached-reserve",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "memcached-reserve",
+            "port": 11211,
+            "targetPort": 11211
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "memcached-reserve"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-reservation"
+        },
+        "name": "mongodb-reservation",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "mongodb-reservation"
+          }
+        },
+        "strategy": {
+          "type": "Recreate"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "mongodb-reservation"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "mongodb-reservation",
+                "image": "mongo:4.4.6@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "mountPath": "/data/db",
+                    "name": "reservation"
+                  }
+                ]
+              }
+            ],
+            "hostname": "reservation-db",
+            "restartPolicy": "Always",
+            "volumes": [
+              {
+                "name": "reservation",
+                "persistentVolumeClaim": {
+                  "claimName": "reservation-pvc"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-reservation"
+        },
+        "name": "mongodb-reservation",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "mongodb-reservation",
+            "port": 27017,
+            "targetPort": 27017
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "mongodb-reservation"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "reservation-pv",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "volumeMode": "Filesystem",
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "capacity": {
+          "storage": "1Gi"
+        },
+        "storageClassName": "reservation-storage",
+        "hostPath": {
+          "path": "/data/volumes/reservation-pv",
+          "type": "DirectoryOrCreate"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "reservation-pvc",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "storageClassName": "reservation-storage",
+        "resources": {
+          "requests": {
+            "storage": "1Gi"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "search"
+        },
+        "name": "search",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "search"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "search"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "search",
+                "image": "igorrudyk1/hotelreservation:latest@sha256:cb64678950a01728551701f5782e34eef049e422f73eae7dcb69d7549682008c",
+                "command": [
+                  "search"
+                ],
+                "ports": [
+                  {
+                    "containerPort": 8082
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "search"
+        },
+        "name": "search",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8082",
+            "port": 8082,
+            "targetPort": 8082
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "search"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "user"
+        },
+        "name": "user",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "user"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "user"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "user",
+                "image": "igorrudyk1/hotelreservation:latest@sha256:cb64678950a01728551701f5782e34eef049e422f73eae7dcb69d7549682008c",
+                "command": [
+                  "user"
+                ],
+                "ports": [
+                  {
+                    "containerPort": 8086
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always"
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "user"
+        },
+        "name": "user",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8086",
+            "port": 8086,
+            "targetPort": 8086
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "user"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-user"
+        },
+        "name": "mongodb-user",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "io.kompose.service": "mongodb-user"
+          }
+        },
+        "strategy": {
+          "type": "Recreate"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kompose.cmd": "kompose convert",
+              "kompose.version": "1.22.0 (955b78124)",
+              "sidecar.istio.io/statsInclusionPrefixes": "cluster.outbound,cluster_manager,listener_manager,http_mixer_filter,tcp_mixer_filter,server,cluster.xds-grp,listener,connection_manager",
+              "sidecar.istio.io/statsInclusionRegexps": "http.*"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "io.kompose.service": "mongodb-user"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "mongodb-user",
+                "image": "mongo:4.4.6@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "mountPath": "/data/db",
+                    "name": "user"
+                  }
+                ]
+              }
+            ],
+            "hostname": "user-db",
+            "restartPolicy": "Always",
+            "volumes": [
+              {
+                "name": "user",
+                "persistentVolumeClaim": {
+                  "claimName": "user-pvc"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "status": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kompose.cmd": "kompose convert",
+          "kompose.version": "1.22.0 (955b78124)"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "mongodb-user"
+        },
+        "name": "mongodb-user",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "mongodb-user",
+            "port": 27017,
+            "targetPort": 27017
+          }
+        ],
+        "selector": {
+          "io.kompose.service": "mongodb-user"
+        }
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "user-pv",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "volumeMode": "Filesystem",
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "capacity": {
+          "storage": "1Gi"
+        },
+        "storageClassName": "user-storage",
+        "hostPath": {
+          "path": "/data/volumes/user-pv",
+          "type": "DirectoryOrCreate"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "user-pvc",
+        "namespace": "hotel-reservation"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "storageClassName": "user-storage",
+        "resources": {
+          "requests": {
+            "storage": "1Gi"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+[submodule "social-network/src"]
+	path = social-network/src
+	url = https://github.com/SmartHypercube/autothrottle-social-network-src.git

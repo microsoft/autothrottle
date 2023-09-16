@@ -1,0 +1,4994 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "name": "train-ticket"
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-user-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-user-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-user-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-user-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-auth-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-auth-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-auth-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-auth-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-route-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-route-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-route-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-route-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-contacts-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-contacts-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-contacts-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-contacts-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-order-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-order-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-order-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-order-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-order-other-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-order-other-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-order-other-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-order-other-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-config-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-config-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-config-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-config-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-station-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-station-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-station-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-station-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-train-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-train-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-train-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-train-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-travel-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-travel-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-travel-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel2-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-travel2-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-travel2-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-travel2-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-price-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-price-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-price-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-price-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-security-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-security-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-security-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-security-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-inside-payment-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-inside-payment-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-inside-payment-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-inside-payment-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-payment-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-payment-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-payment-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-payment-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-assurance-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-assurance-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-assurance-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-assurance-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-ticket-office-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-ticket-office-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-ticket-office-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-ticket-office-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-voucher-mysql"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-voucher-mysql"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-voucher-mysql"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-voucher-mysql",
+                "image": "mysql:5.6.35@sha256:c2f3286842500ac9e4f81b638f6c488314d7a81784bc7fd1ba806816d70abb55",
+                "imagePullPolicy": "IfNotPresent",
+                "env": [
+                  {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "value": "root"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 3306
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-food-map-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-food-map-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-food-map-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-food-map-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-consign-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-consign-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-consign-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-consign-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-consign-price-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-consign-price-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-consign-price-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-consign-price-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-food-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-food-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-food-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-food-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-notification-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-notification-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-notification-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-notification-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-notification-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-notification-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-delivery-mongo"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-delivery-mongo"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-delivery-mongo"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-delivery-mongo",
+                "image": "mongo:5.0.2-focal@sha256:3938ddf3039cc291ce26ef63fddfb36441f8fae9909a5e5ec521453d850de812",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 27017
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-delivery-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-delivery-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "rabbitmq"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "rabbitmq"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "rabbitmq"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "rabbitmq",
+                "image": "rabbitmq:3@sha256:50282e8cbf22ac261efd13fb881da900c09367ceb166c3ec5d23089986464df6",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 5672
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "rabbitmq"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 5672
+          }
+        ],
+        "selector": {
+          "app": "rabbitmq"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-user-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-user-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-auth-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-auth-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-route-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-route-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-contacts-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-contacts-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-order-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-order-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-order-other-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-order-other-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-config-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-config-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-station-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-station-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-train-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-train-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-travel-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel2-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-travel2-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-price-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-price-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-security-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-security-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-inside-payment-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-inside-payment-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-payment-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-payment-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-assurance-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-assurance-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-ticket-office-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-ticket-office-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-voucher-mysql"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 3306
+          }
+        ],
+        "selector": {
+          "app": "ts-voucher-mysql"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-food-map-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-food-map-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-consign-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-consign-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-consign-price-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-consign-price-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-food-mongo"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 27017
+          }
+        ],
+        "selector": {
+          "app": "ts-food-mongo"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-basic-info-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-admin-basic-info-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-admin-basic-info-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-admin-basic-info-service",
+                "image": "codewisdom/ts-admin-basic-info-service:0.2.1@sha256:601f3095bd8da5a4f3ab7e29f14afcbef00187682db976772f975810cbce8004",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-admin-basic-info-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18767
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18767
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-order-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-admin-order-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-admin-order-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-admin-order-service",
+                "image": "codewisdom/ts-admin-order-service:0.2.1@sha256:3459fa7f1bc0b4724c1496e8ba8fec60181b6559dec0168b87da3b5bedfe8a0d",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-admin-order-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16112
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16112
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-route-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-admin-route-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-admin-route-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-admin-route-service",
+                "image": "codewisdom/ts-admin-route-service:0.2.1@sha256:c6fe3cfb82817d972b5c32fae2a14b99e4d9e52b8790367db03659b4c6a58b43",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-admin-route-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16113
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16113
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-travel-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-admin-travel-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-admin-travel-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-admin-travel-service",
+                "image": "codewisdom/ts-admin-travel-service:0.2.1@sha256:617c3f709b8e0089d22f62a0fc37d8eaf7a2a8d83027a3193202224c8dc076eb",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-admin-travel-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16114
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16114
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-user-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-admin-user-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-admin-user-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-admin-user-service",
+                "image": "codewisdom/ts-admin-user-service:0.2.1@sha256:fa4cc3a5d72138688d15421b6d8e42fb86e143ae3e45de2025895aa0c2af1801",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-admin-user-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16115
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16115
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-assurance-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-assurance-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-assurance-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-assurance-service",
+                "image": "codewisdom/ts-assurance-service:0.2.1@sha256:3b5f1c735b2c79cc8179f2339a19e02806f777e65e83e2e023c922a72337af3c",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-assurance-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18888
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18888
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-basic-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-basic-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-basic-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-basic-service",
+                "image": "codewisdom/ts-basic-service:0.2.1@sha256:93598bd07e0c703788f67cda122394620410bb140e44e6a2422e6bec84145c4e",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-basic-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 15680
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 15680
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-cancel-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-cancel-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-cancel-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-cancel-service",
+                "image": "codewisdom/ts-cancel-service:0.2.1@sha256:0812ed7c3281bf75eba703ccbd79abb6587e3ca38507b74f37527ce8ad12f427",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-cancel-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18885
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18885
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-config-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-config-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-config-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-config-service",
+                "image": "codewisdom/ts-config-service:0.2.1@sha256:a94813d69464525be2fb86a535f5b1799225a936921c214f18b95acb99985466",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-config-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 15679
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 15679
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-consign-price-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-consign-price-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-consign-price-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-consign-price-service",
+                "image": "codewisdom/ts-consign-price-service:0.2.1@sha256:90c740e21fc77d657a20c13a3a1a4d518d6a4ca0c121a6184475938bdc272c3b",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-consign-price-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16110
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16110
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-consign-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-consign-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-consign-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-consign-service",
+                "image": "codewisdom/ts-consign-service:0.2.1@sha256:8fe341338a7b4d244ec12e5b35c90bee2eec8c1c901896e5037b78ce3505c882",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-consign-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16111
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16111
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-contacts-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-contacts-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-contacts-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-contacts-service",
+                "image": "codewisdom/ts-contacts-service:0.2.1@sha256:725be6a0bda6674f1a71d30e658dbaef772c7fb384164a36c4489845e7738657",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-contacts-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12347
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12347
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-execute-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-execute-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-execute-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-execute-service",
+                "image": "codewisdom/ts-execute-service:0.2.1@sha256:637f66e0338682807ee7e77d773540c33f0b2f8d0143178687028b660f7348c7",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-execute-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12386
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12386
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-food-map-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-food-map-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-food-map-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-food-map-service",
+                "image": "codewisdom/ts-food-map-service:0.2.1@sha256:6ad2077df52547f1ef3b0fbafc77c202ae7d140d59bde00d494e3a1ae2090c36",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-food-map-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18855
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18855
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-food-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-food-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-food-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-food-service",
+                "image": "codewisdom/ts-food-service:0.2.1@sha256:07ff7ddc36fc5dbd0371569df7517d699674e7ffa51594c12518428749f9c669",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-food-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  },
+                  {
+                    "name": "rabbitmq_host",
+                    "value": "rabbitmq"
+                  },
+                  {
+                    "name": "rabbitmq_port",
+                    "value": "5672"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18856
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18856
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-inside-payment-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-inside-payment-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-inside-payment-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-inside-payment-service",
+                "image": "codewisdom/ts-inside-payment-service:0.2.1@sha256:4df0f48b6110f151b76150624d1b9ed57250e28dafc6b5309c1b089261123390",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-inside-payment-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18673
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18673
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-auth-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-auth-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-auth-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-auth-service",
+                "image": "codewisdom/ts-auth-service:0.2.1@sha256:d635f47365721ae8ed37206f246cb96f935d4f54da9474d871ca13c25c41c231",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-auth-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12340
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12340
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-news-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-news-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-news-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-news-service",
+                "image": "codewisdom/ts-news-service:0.2.1@sha256:0f8ae8b5f09239f14f8b50ac02e3bc08e2f05fb011c48e65c174aaa3dd6c5326",
+                "imagePullPolicy": "IfNotPresent",
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12862
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12862
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-notification-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-notification-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-notification-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-notification-service",
+                "image": "codewisdom/ts-notification-service:0.2.1@sha256:e6cecc7fa562d6b3f61d1bfc7f1319d27394406b5b262235e032292979d8cef4",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-notification-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  },
+                  {
+                    "name": "email_address",
+                    "value": "trainticket_notify@163.com"
+                  },
+                  {
+                    "name": "email_password",
+                    "value": "GZKSCXHBOLKMCLDQ"
+                  },
+                  {
+                    "name": "rabbitmq_host",
+                    "value": "rabbitmq"
+                  },
+                  {
+                    "name": "rabbitmq_port",
+                    "value": "5672"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 17853
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 17853
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-order-other-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-order-other-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-order-other-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-order-other-service",
+                "image": "codewisdom/ts-order-other-service:0.2.1@sha256:9fb33c018ae66eb308432bd2409254ad733f93d850498a0076e9e311a87e5f56",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-order-other-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12032
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12032
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-order-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-order-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-order-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-order-service",
+                "image": "codewisdom/ts-order-service:0.2.1@sha256:85d9dccfeed752462feab73877174daa8a0436ddabc6fbb65cecb608e69a4f9c",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-order-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12031
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12031
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-payment-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-payment-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-payment-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-payment-service",
+                "image": "codewisdom/ts-payment-service:0.2.1@sha256:7e315dc43ddca64d38274bb4bcc04baaf3cb14cfbe4b83c85bd7ae604e047f14",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-payment-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 19001
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 19001
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-preserve-other-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-preserve-other-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-preserve-other-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-preserve-other-service",
+                "image": "codewisdom/ts-preserve-other-service:0.2.1@sha256:0db786c18d96df72f7c40a32c5a62e8d126392296ad9f0a3ba9e3edd79226ef8",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-preserve-other-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  },
+                  {
+                    "name": "rabbitmq_host",
+                    "value": "rabbitmq"
+                  },
+                  {
+                    "name": "rabbitmq_port",
+                    "value": "5672"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 14569
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 14569
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-preserve-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-preserve-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-preserve-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-preserve-service",
+                "image": "codewisdom/ts-preserve-service:0.2.1@sha256:bb1b7f1e9caddf9ae819f365e4329c26fb042e89a7d61eff0dd31c54eafd12eb",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-preserve-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  },
+                  {
+                    "name": "rabbitmq_host",
+                    "value": "rabbitmq"
+                  },
+                  {
+                    "name": "rabbitmq_port",
+                    "value": "5672"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 14568
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 14568
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-price-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-price-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-price-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-price-service",
+                "image": "codewisdom/ts-price-service:0.2.1@sha256:06778da3b5c9d4af5de7320cabced0b2ac5e9f3981de3f20a32c9686add2d27e",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-price-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16579
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16579
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-rebook-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-rebook-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-rebook-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-rebook-service",
+                "image": "codewisdom/ts-rebook-service:0.2.1@sha256:8115f0ddefd912289a8c058fd969ae0f42d514d5a53ef8c6b0bed60dbd2d6362",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-rebook-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18886
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18886
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-route-plan-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-route-plan-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-route-plan-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-route-plan-service",
+                "image": "codewisdom/ts-route-plan-service:0.2.1@sha256:c384d943f1a670570252e706e0770b09f0f716574e81d7ec6b54788eff025507",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-route-plan-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 14578
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 14578
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-route-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-route-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-route-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-route-service",
+                "image": "codewisdom/ts-route-service:0.2.1@sha256:825c997b808254de467755efcec0fd3140a0769bf385fcef81f7ad625a8189ff",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-route-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 11178
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 11178
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-seat-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-seat-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-seat-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-seat-service",
+                "image": "codewisdom/ts-seat-service:0.2.1@sha256:c28cee5df11120633f790e7e34282a3cd4dd3a43f1edbb68f86d32cdc9a92389",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-seat-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18898
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18898
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-security-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-security-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-security-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-security-service",
+                "image": "codewisdom/ts-security-service:0.2.1@sha256:eecaa520cf3a33a9ffce66688777ff61549931b8013c3dcae901544c41563432",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-security-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 11188
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 11188
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-user-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-user-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-user-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-user-service",
+                "image": "codewisdom/ts-user-service:0.2.1@sha256:0b240607b7bec3dd9b7e4f4b4c0361d9281a25648ccb36c427330f9cf918e407",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-user-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12342
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12342
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-station-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-station-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-station-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-station-service",
+                "image": "codewisdom/ts-station-service:0.2.1@sha256:ae1f66358a59ba1eea9079498e08b6a1fa8713ab3fd2760c500d21254d2985b0",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-station-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12345
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12345
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-ticket-office-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-ticket-office-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-ticket-office-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-ticket-office-service",
+                "image": "codewisdom/ts-ticket-office-service:0.2.1@sha256:6d6f01686c4001b33d168fdf0a0a45c2851e46c11f0064e1e563a366d662b334",
+                "imagePullPolicy": "IfNotPresent",
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16108
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16108
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-ticketinfo-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-ticketinfo-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-ticketinfo-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-ticketinfo-service",
+                "image": "codewisdom/ts-ticketinfo-service:0.2.1@sha256:b01122cfbf386cde4cb006989534b7edbb0fc2a5873b607f3d1b5d3b8de45427",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-ticketinfo-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 15681
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 15681
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-train-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-train-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-train-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-5",
+            "containers": [
+              {
+                "name": "ts-train-service",
+                "image": "codewisdom/ts-train-service:0.2.1@sha256:c2321c822bc7d6d6afb5bda65105f6222611621e196f0b752aa0152b80373124",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-train-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 14567
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 14567
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel2-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-travel2-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-travel2-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-travel2-service",
+                "image": "codewisdom/ts-travel2-service:0.2.1@sha256:48b33c1309c6a7b576b38ab6bbeb0ff89cf98473270593df14ea56709f3c3601",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-travel2-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16346
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16346
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel-plan-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-travel-plan-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-travel-plan-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-travel-plan-service",
+                "image": "codewisdom/ts-travel-plan-service:0.2.1@sha256:c9bd904a84cea8fc1e479eb83ba5d79edcc979277ea13658b8bf48d9a8f7ac68",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-travel-plan-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 14322
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 14322
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-travel-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-travel-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-2",
+            "containers": [
+              {
+                "name": "ts-travel-service",
+                "image": "codewisdom/ts-travel-service:0.2.1@sha256:0c8a669cfc68be7149a05856f1c60201a0a6db6612b3f81f370caae452f85a82",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-travel-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 12346
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 12346
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-delivery-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-delivery-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-delivery-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-delivery-service",
+                "image": "codewisdom/ts-delivery-service:0.2.1@sha256:fa9fd1cbe73207a07c2ac6cf268d288545692a9a64430a0b4e1a5127908802cf",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-delivery-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  },
+                  {
+                    "name": "rabbitmq_host",
+                    "value": "rabbitmq"
+                  },
+                  {
+                    "name": "rabbitmq_port",
+                    "value": "5672"
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 18808
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18808
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-verification-code-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-verification-code-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-verification-code-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-verification-code-service",
+                "image": "codewisdom/ts-verification-code-service:0.2.1@sha256:8fba43bf35a60ac3bbebcec8914f1b1de990ad0a5c21e18d35860e9b336e6922",
+                "imagePullPolicy": "IfNotPresent",
+                "command": [
+                  "java",
+                  "-jar",
+                  "/app/ts-verification-code-service-1.0.jar"
+                ],
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 15678
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 15678
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-voucher-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-voucher-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-voucher-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-voucher-service",
+                "image": "codewisdom/ts-voucher-service:0.2.1@sha256:2635aefb54f22f32faff08fa4bb702593ec8e4b8e9760ed835df507d53242457",
+                "imagePullPolicy": "IfNotPresent",
+                "env": [
+                  {
+                    "name": "NODE_IP",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "fieldPath": "status.hostIP"
+                      }
+                    }
+                  }
+                ],
+                "ports": [
+                  {
+                    "containerPort": 16101
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 16101
+                  },
+                  "initialDelaySeconds": 60,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-basic-info-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18767
+          }
+        ],
+        "selector": {
+          "app": "ts-admin-basic-info-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-delivery-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18808
+          }
+        ],
+        "selector": {
+          "app": "ts-delivery-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-order-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16112
+          }
+        ],
+        "selector": {
+          "app": "ts-admin-order-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-route-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16113
+          }
+        ],
+        "selector": {
+          "app": "ts-admin-route-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-travel-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16114
+          }
+        ],
+        "selector": {
+          "app": "ts-admin-travel-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-admin-user-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16115
+          }
+        ],
+        "selector": {
+          "app": "ts-admin-user-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-assurance-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18888
+          }
+        ],
+        "selector": {
+          "app": "ts-assurance-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-basic-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 15680
+          }
+        ],
+        "selector": {
+          "app": "ts-basic-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-cancel-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18885
+          }
+        ],
+        "selector": {
+          "app": "ts-cancel-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-config-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 15679
+          }
+        ],
+        "selector": {
+          "app": "ts-config-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-consign-price-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16110
+          }
+        ],
+        "selector": {
+          "app": "ts-consign-price-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-consign-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16111
+          }
+        ],
+        "selector": {
+          "app": "ts-consign-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-contacts-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 12347
+          }
+        ],
+        "selector": {
+          "app": "ts-contacts-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-execute-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 12386
+          }
+        ],
+        "selector": {
+          "app": "ts-execute-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-food-map-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18855
+          }
+        ],
+        "selector": {
+          "app": "ts-food-map-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-food-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18856
+          }
+        ],
+        "selector": {
+          "app": "ts-food-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-inside-payment-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18673
+          }
+        ],
+        "selector": {
+          "app": "ts-inside-payment-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-user-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 12342
+          }
+        ],
+        "selector": {
+          "app": "ts-user-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-notification-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 17853
+          }
+        ],
+        "selector": {
+          "app": "ts-notification-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-news-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 12862
+          }
+        ],
+        "selector": {
+          "app": "ts-news-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-order-other-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 12032
+          }
+        ],
+        "selector": {
+          "app": "ts-order-other-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-order-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 12031
+          }
+        ],
+        "selector": {
+          "app": "ts-order-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-payment-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 19001
+          }
+        ],
+        "selector": {
+          "app": "ts-payment-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-preserve-other-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 14569
+          }
+        ],
+        "selector": {
+          "app": "ts-preserve-other-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-preserve-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 14568
+          }
+        ],
+        "selector": {
+          "app": "ts-preserve-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-price-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16579
+          }
+        ],
+        "selector": {
+          "app": "ts-price-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-rebook-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18886
+          }
+        ],
+        "selector": {
+          "app": "ts-rebook-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-route-plan-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 14578
+          }
+        ],
+        "selector": {
+          "app": "ts-route-plan-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-route-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 11178
+          }
+        ],
+        "selector": {
+          "app": "ts-route-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-seat-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 18898
+          }
+        ],
+        "selector": {
+          "app": "ts-seat-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-security-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 11188
+          }
+        ],
+        "selector": {
+          "app": "ts-security-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-auth-service"
+      },
+      "spec": {
+        "type": "NodePort",
+        "ports": [
+          {
+            "name": "http",
+            "port": 12340,
+            "nodePort": 30000
+          }
+        ],
+        "selector": {
+          "app": "ts-auth-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-station-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 12345
+          }
+        ],
+        "selector": {
+          "app": "ts-station-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-ticket-office-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16108
+          }
+        ],
+        "selector": {
+          "app": "ts-ticket-office-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-ticketinfo-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 15681
+          }
+        ],
+        "selector": {
+          "app": "ts-ticketinfo-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-train-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 14567
+          }
+        ],
+        "selector": {
+          "app": "ts-train-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel2-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16346
+          }
+        ],
+        "selector": {
+          "app": "ts-travel2-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel-plan-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 14322
+          }
+        ],
+        "selector": {
+          "app": "ts-travel-plan-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-travel-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 12346
+          }
+        ],
+        "selector": {
+          "app": "ts-travel-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-verification-code-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 15678
+          }
+        ],
+        "selector": {
+          "app": "ts-verification-code-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-voucher-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 16101
+          }
+        ],
+        "selector": {
+          "app": "ts-voucher-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-avatar-service"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-avatar-service"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-avatar-service"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-3",
+            "containers": [
+              {
+                "name": "ts-avatar-service",
+                "image": "codewisdom/ts-avatar-service:0.2.1@sha256:ab1ecb1a3165c625981aae045801107e45a5b6be2d6088de534ed5bba8aae2f5",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 17001
+                  }
+                ],
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 17001
+                  },
+                  "initialDelaySeconds": 160,
+                  "periodSeconds": 10,
+                  "timeoutSeconds": 5
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-avatar-service"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "port": 17001
+          }
+        ],
+        "selector": {
+          "app": "ts-avatar-service"
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-ui-dashboard"
+      },
+      "spec": {
+        "selector": {
+          "matchLabels": {
+            "app": "ts-ui-dashboard"
+          }
+        },
+        "replicas": 1,
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "ts-ui-dashboard"
+            }
+          },
+          "spec": {
+            "nodeName": "autothrottle-4",
+            "containers": [
+              {
+                "name": "ts-ui-dashboard",
+                "image": "codewisdom/ts-ui-dashboard:0.2.1@sha256:d98b6bf0c99d2d7467d322740e9e54bf322c8f77ca3077d80c295ebd6619e338",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  {
+                    "containerPort": 8080
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Always",
+            "enableServiceLinks": false
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "namespace": "train-ticket",
+        "name": "ts-ui-dashboard"
+      },
+      "spec": {
+        "type": "NodePort",
+        "ports": [
+          {
+            "name": "http",
+            "port": 8080,
+            "nodePort": 30001
+          }
+        ],
+        "selector": {
+          "app": "ts-ui-dashboard"
+        }
+      }
+    }
+  ]
+}
