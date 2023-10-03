@@ -24,7 +24,7 @@ requests==2.31.0
 roundrobin==0.0.4
 six==1.16.0
 typing-extensions==4.7.1
-urllib3==2.0.4
+urllib3==2.0.6
 vowpalwabbit==9.9.0
 werkzeug==2.3.7
 zipp==3.16.2
