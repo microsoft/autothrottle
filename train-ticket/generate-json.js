@@ -282,19 +282,7 @@ const doc = {
     java(worker2, 'ts-inside-payment-service', 18673), //XXX
     java(worker2, 'ts-auth-service', 12340), //XXX
     java(worker1, 'ts-news-service', 12862, { noCommand: true }),
-    java(worker3, 'ts-notification-service', 17853, {
-      extraEnv: [
-        {
-          "name": "email_address",
-          "value": "trainticket_notify@163.com"
-        },
-        {
-          "name": "email_password",
-          "value": "GZKSCXHBOLKMCLDQ"
-        },
-        ...rabbitmqEnv,
-      ],
-    }),
+    java(worker3, 'ts-notification-service', 17853, { extraEnv: rabbitmqEnv }),
     java(worker3, 'ts-order-other-service', 12032),
     java(worker1, 'ts-order-service', 12031),
     java(worker2, 'ts-payment-service', 19001), //XXX

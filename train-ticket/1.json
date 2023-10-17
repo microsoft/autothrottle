@@ -2644,14 +2644,6 @@
                     }
                   },
                   {
-                    "name": "email_address",
-                    "value": "trainticket_notify@163.com"
-                  },
-                  {
-                    "name": "email_password",
-                    "value": "GZKSCXHBOLKMCLDQ"
-                  },
-                  {
                     "name": "rabbitmq_host",
                     "value": "rabbitmq"
                   },
